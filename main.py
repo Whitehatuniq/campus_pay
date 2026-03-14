@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, wallet, payment, transaction, admin, fees, events
+from routers import auth, wallet, payment, transaction, admin, fees, events, canteen
 
 app = FastAPI(
     title="CampusPay API",
@@ -23,6 +23,7 @@ app.include_router(transaction.router, prefix="/api/transaction",  tags=["Transa
 app.include_router(admin.router,       prefix="/api/admin",       tags=["Admin"])
 app.include_router(fees.router,        prefix="/api/fees",        tags=["Fees"])
 app.include_router(events.router,      prefix="/api/events",      tags=["Events"])
+app.include_router(canteen.router,     prefix="/api/canteen",     tags=["Canteen"])
 
 @app.get("/")
 def root():
