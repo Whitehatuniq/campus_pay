@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, wallet, payment, transaction, admin, fees, events, canteen
+from routers import auth, wallet, payment, transaction, admin, fees, events, canteen, admin_manage
 
 app = FastAPI(
     title="CampusPay API",
@@ -16,14 +16,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router,        prefix="/api/auth",        tags=["Authentication"])
-app.include_router(wallet.router,      prefix="/api/wallet",      tags=["Wallet"])
-app.include_router(payment.router,     prefix="/api/payment",     tags=["Payment"])
-app.include_router(transaction.router, prefix="/api/transaction",  tags=["Transactions"])
-app.include_router(admin.router,       prefix="/api/admin",       tags=["Admin"])
-app.include_router(fees.router,        prefix="/api/fees",        tags=["Fees"])
-app.include_router(events.router,      prefix="/api/events",      tags=["Events"])
-app.include_router(canteen.router,     prefix="/api/canteen",     tags=["Canteen"])
+app.include_router(auth.router,         prefix="/api/auth",         tags=["Authentication"])
+app.include_router(wallet.router,       prefix="/api/wallet",       tags=["Wallet"])
+app.include_router(payment.router,      prefix="/api/payment",      tags=["Payment"])
+app.include_router(transaction.router,  prefix="/api/transaction",  tags=["Transactions"])
+app.include_router(admin.router,        prefix="/api/admin",        tags=["Admin"])
+app.include_router(admin_manage.router, prefix="/api/admin-manage", tags=["Admin Management"])
+app.include_router(fees.router,         prefix="/api/fees",         tags=["Fees"])
+app.include_router(events.router,       prefix="/api/events",       tags=["Events"])
+app.include_router(canteen.router,      prefix="/api/canteen",      tags=["Canteen"])
 
 @app.get("/")
 def root():
