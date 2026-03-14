@@ -158,3 +158,19 @@ async def update_profile(
         db.collection("users").document(uid).update(update_data)
 
     return {"message": "Profile updated successfully"}
+
+
+@router.patch("/update-profile", response_model=dict)
+async def update_profile(
+    phone: str = None,
+    avatar: str = None,
+    current_user: dict = Depends(get_current_user)
+):
+    db = get_db()
+    uid = current_user["sub"]
+    update_data = {}
+    if phone: update_data["phone"] = phone
+    if avatar: update_data["avatar"] = avatar
+    if update_data:
+        db.collection("users").document(uid).update(update_data)
+    return {"message": "Profile updated successfully"}
